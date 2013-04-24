@@ -1,0 +1,54 @@
+* rauth_samples
+
+A collection of examples for handling =OAuth= procedures with =rauth=, covering several frameworks.
+
+* Motivation
+
+If you are like me, and starting with =OAuth=, you are terribly confused: you have trouble identified secrets, IDs, creating them in your provider for your application ...
+And you have no idea how to implement the usual =OAuth= flows to integrate your web application with OAuth providers.
+
+These examples are here to help you: I aim to have an easy-to-test reference implementation of several frequent =OAuth= procedures, to get you up-and-running in no time,
+for your favorite =python= framework.
+
+Currently, the following examples are provided:
+
+- =google-cli=: to be run on the command line. Authorization must be obtained with a browsers, and copy-pasted to the terminal. =OAuth= providers (at least google) to not provide an out-of-browser mechanism to obtain access tokens. Supports first-time authorization (Google replies with a =code=), and successive authorization (Google replies with an =access_token=)
+- =google-flask=: implements autorization, =access_token= reuse (until the token has expired), and =access_token= refresh (using =refresh_token=). Also, new logins can be forced, and the test user can be forgotten.
+- =google-web2py=: same as =google-flask=, but for =web2py=
+
+* Secrets
+
+Since we are doing OAuth here, and you probably want to test your application, you will need to provide your secrets.
+I will try to make it easy to clearly specify where to put this information in the examples.
+
+Currently all secrets are centralized in secrets.py. I provide here a dummy version of the file, which you must modify to insert your real secrets.
+Since you do not want that file to be committed, and it is already in the repo, the usual .gitignore mechanism does not work. You need to do:
+
+: git update-index --assume-unchanged secrets.py
+
+Then you can modify that file and commit / push without fear of your secrets being published.
+
+In case you need to revert that at some point:
+
+: git update-index --no-assume-unchanged secrets.py
+
+* Register applications
+
+  |----------+--------------------------------------|
+  | PROVIDER | LINK                                 |
+  |----------+--------------------------------------|
+  | GOOGLE   | https://code.google.com/apis/console |
+  |----------+--------------------------------------|
+
+* Run the test applications
+
+: python google-cli.py
+
+: python google-flask.py
+
+* References
+
+The work is built on top of the excellent [[https://github.com/litl/rauth][rauth library]], where more [[https://github.com/litl/rauth/tree/master/examples][examples]] can be found, the [[http://flask.pocoo.org/][flask]] microfrawework and the [[http://web2py.com/][web2py]] framework.
+The google example is originally coming from an [[https://github.com/litl/rauth/blob/46a8b24b7fbef371fff26e3fc92c4c74a293bc68/examples/google.py][implementation]] by [[https://github.com/brunoqc][brunoqc]]
+
+Pull requests are very much welcome: if you can provide an easy-to-test implementation for your framework / =OAuth= provider using =rauth=, I will happily pull.
