@@ -34,7 +34,7 @@ nosetests.xml
 .project
 .pydevproject
 
-# Databae files
+# Database files
 *.db
 
 # Emacs backup files

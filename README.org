@@ -46,9 +46,40 @@ In case you need to revert that at some point:
 
 : python google-flask.py
 
+** google_web2py
+
+- Copy the =google_web2py= directory to your =web2py= applications directory.
+- Copy the =secrets.py= to the =modules= directory.
+- Run web2py:
+
+: python web2py.org -a 1234
+
+* Application URLs
+
+By default, the applications will listen in the following URLs. These URLs must match the redirect URLs given below.
+
+|---------------+-------------------------------------------------|
+| APPLICATION   | URL                                             |
+|---------------+-------------------------------------------------|
+| google-flask  | http://127.0.0.1:5000                           |
+| google_web2py | http://localhost:8000/google_web2py/oauth/index |
+|---------------+-------------------------------------------------|
+
+* Redirect URIs
+
+Configure the following URLs in the API console for the =OAuth= provider.
+
+|----------+------------------------------------------------------+-----------------------------------|
+| PROVIDER | REDIRECT URI                                         | COMMENT                           |
+|----------+------------------------------------------------------+-----------------------------------|
+| GOOGLE   | http://localhost                                     |                                   |
+| GOOGLE   | http://127.0.0.1:5000/google/authorized              | To test the google-flask example  |
+| GOOGLE   | http://localhost:8000/google_web2py/oauth/authorized | To test the google_web2py example |
+|----------+------------------------------------------------------+-----------------------------------|
+
 * References
 
-The work is built on top of the excellent [[https://github.com/litl/rauth][rauth library]], where more [[https://github.com/litl/rauth/tree/master/examples][examples]] can be found, the [[http://flask.pocoo.org/][flask]] microfrawework and the [[http://web2py.com/][web2py]] framework.
+This work is built on top of the excellent [[https://github.com/litl/rauth][rauth library]], where more [[https://github.com/litl/rauth/tree/master/examples][examples]] can be found, the [[http://flask.pocoo.org/][flask]] microfrawework and the [[http://web2py.com/][web2py]] framework.
 The google example is originally coming from an [[https://github.com/litl/rauth/blob/46a8b24b7fbef371fff26e3fc92c4c74a293bc68/examples/google.py][implementation]] by [[https://github.com/brunoqc][brunoqc]]
 
 Pull requests are very much welcome: if you can provide an easy-to-test implementation for your framework / =OAuth= provider using =rauth=, I will happily pull.
